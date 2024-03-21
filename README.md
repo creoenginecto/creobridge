@@ -1,1 +1,1 @@
-# creogotbit
+# creo-bridge-solana

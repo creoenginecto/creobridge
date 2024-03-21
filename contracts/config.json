@@ -1,0 +1,13 @@
+{
+  "testnet": {
+    "relayer": "0x032f6A1847B019729f8235B3E56E36A7c18D0463"
+  },
+  "mainnet": {
+    "admin": "0x0ee36004cF68A488FC80cAeF1767F2da4a9cBa6a",
+    "relayer": "0x190f59294C5a67955cb3B7c0e427Bcc5cd16d768",
+    "manager": "0x0ee36004cF68A488FC80cAeF1767F2da4a9cBa6a",
+    "feeSend": 50,
+    "feeFulfill": 0,
+    "feeWallet": "0x0cDb78f8CF5576D652Cb792bA0F76cA2E7c5f3e8"
+  }
+}
