@@ -142,17 +142,8 @@ contract BridgeAssist is AccessControl, Pausable, EIP712 {
         // minimum amount to make sure satisfactory amount of fee is taken
         require(amount / exchangeRate >= FEE_DENOMINATOR, 'amount < fee denominator');
 
-        {
-          uint256 balanceBefore = TOKEN.balanceOf(address(this));
-          _receiveTokens(msg.sender, amount);
-          uint256 balanceAfter = TOKEN.balanceOf(address(this));
-
-          require(balanceAfter - balanceBefore == amount, 'bad token');
-        }
-
         // the fee recipient eats the precision loss
         uint256 currentFee = (amount * feeSend) / FEE_DENOMINATOR / exchangeRate;
-        if (currentFee != 0) _dispenseTokens(feeWallet, currentFee * exchangeRate);
 
         transactions[msg.sender].push(
             Transaction({
@@ -180,6 +171,16 @@ contract BridgeAssist is AccessControl, Pausable, EIP712 {
             (amount - currentFee),
             exchangeRate
         );
+
+        {
+          uint256 balanceBefore = TOKEN.balanceOf(address(this));
+          _receiveTokens(msg.sender, amount);
+          uint256 balanceAfter = TOKEN.balanceOf(address(this));
+
+          require(balanceAfter - balanceBefore == amount, 'bad token');
+        }
+
+        if (currentFee != 0) _dispenseTokens(feeWallet, currentFee * exchangeRate);
     }
 
     /// @dev fulfills a bridge transaction from another chain

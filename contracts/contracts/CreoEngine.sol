@@ -13,11 +13,17 @@ contract CreoEngine is ERC20Burnable, Ownable {
         uint256 _totalSupply,
         address _owner
     ) ERC20(_name, _symbol) {
+        require(bytes(_name).length != 0, 'Name is empty');
+        require(bytes(_symbol).length != 0, 'Symbol is empty');
+        require(_totalSupply > 0, 'Total supply is zero');
+        require(_owner != address(0), 'Owner is zero address');
+
         _mint(_owner, _totalSupply * (10**18));
         _transferOwnership(_owner);
     }
 
     function setLocked(address user, bool status) external onlyOwner {
+        require(user != address(0), 'Zero address');
         require(locked[user] != status, 'Duplicate');
         locked[user] = status;
     }

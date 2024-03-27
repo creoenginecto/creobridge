@@ -15,6 +15,10 @@ $ yarn testf
 This a hardhat typescript project with `hardhat-deploy` extension.
 Solidity version `0.8.18`
 
+### Technologies Used
+
+Node.js 16.0.0, Yarn 1.22, Hardhat 2.9.6, Hardhat Deploy 0.11.24, OpenZeppelin 4.8.2
+
 ### Tests
 
 Tests are found in the `./test/` folder.
@@ -66,9 +70,23 @@ API_FTM=
 API_ARBITRUM=
 ```
 
-To deploy contracts on `Polygon chain`
+To deploy contracts on `BNB Chain`
 
-You need to pass to constructor parameters:
+```bash
+$ yarn deploy --network bsc_mainnet
+```
+
+The tokens also have to be transferred manually to the BridgeAssist contract address on BNB Chain.
+
+To deploy contracts on `Ethereum`
+
+```bash
+$ yarn deploy --network eth_mainnet
+```
+
+The contracts will be verified on both chains.
+
+The following constructor parameters are changeable in deploy scripts:
 
 #### For Bridge Assist
 
@@ -88,10 +106,6 @@ You need to pass to constructor parameters:
 2. `symbol` - token symbol string
 3. `totalSupply_` - token total supply amount in token weis
 4. `owner_` - token contract owner
-
-```bash
-$ yarn deploy --network polygon_mainnet
-```
 
 ### Deployments
 
